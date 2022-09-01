@@ -34,9 +34,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="nhap-du-lieu">Nhập dữ liệu</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Phân tích</a>
-                </li>
+
             </ul>
         </div>
     </nav>
@@ -52,7 +50,7 @@
                                 <a data-toggle="modal" data-target="#addModal"
                                    class="btn btn-sm btn-primary pull-left"><i class="fa fa-plus-circle"></i>
                                     Thêm</a>
-                                <a class="btn btn-sm pull-left"
+                                <a class="btn btn-sm pull-left" href="xuat-du-lieu?date=${current_day}"
                                    style="margin-left: 20px; background-color: #dc3545;">
                                     <i class="fa fa-file-excel-o"></i> Xuất ra file Excel
                                 </a>
@@ -275,8 +273,7 @@
     })
     $(document).ready(function () {
         $('#remove-record-id').submit(function (e) {
-
-            e.preventDefault();
+                e.preventDefault();
             var form = $('#remove-record-id');
             $.ajax({
                 type: "post",

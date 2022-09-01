@@ -33,9 +33,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="nhap-du-lieu">Nhập dữ liệu</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Phân tích</a>
-                </li>
+
                 <c:if test="${sessionScope.username ne null}">
                 <li class="nav-item">
                     <a class="nav-link" href="dang-xuat">Thoát</a>

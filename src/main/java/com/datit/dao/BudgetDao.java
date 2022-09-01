@@ -40,12 +40,13 @@ public class BudgetDao {
             ps.setInt(5, bg.getUser_id());
             JDBCUtils.showSQL(ps);
             ps.executeUpdate();
+            cnt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public List<Budget> selectAllByIdUser(int user_id,int month) {
+    public List<Budget> selectAllByIdUser(int user_id, int month) {
         Connection cnt = JDBCUtils.getConnection();
         List<Budget> budgets = new ArrayList<Budget>();
         try {
@@ -59,71 +60,77 @@ public class BudgetDao {
                 double value = rs.getDouble("value");
                 Date create_day = rs.getDate("create_day");
                 int type = rs.getInt("type");
-                Budget bg = new Budget(id,title, value, create_day, type, user_id);
+                Budget bg = new Budget(id, title, value, create_day, type, user_id);
                 budgets.add(bg);
             }
+            cnt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return budgets;
     }
 
-    public int getTotalIncome(int user_id,int month) {
+    public int getTotalIncome(int user_id, int month) {
         double total = 0;
         Connection cnt = JDBCUtils.getConnection();
         try {
             PreparedStatement ps = cnt.prepareStatement(SUM_TOTAL_INCOME);
             ps.setInt(1, user_id);
-            ps.setInt(2,month);
+            ps.setInt(2, month);
             JDBCUtils.showSQL(ps);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getDouble("total_income");
             }
+            cnt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return (int) total;
     }
 
-    public int getTotalPay(int user_id,int month) {
+    public int getTotalPay(int user_id, int month) {
         double total = 0;
         Connection cnt = JDBCUtils.getConnection();
         try {
             PreparedStatement ps = cnt.prepareStatement(SUM_TOTAL_PAY);
             ps.setInt(1, user_id);
-            ps.setInt(2,month);
+            ps.setInt(2, month);
             JDBCUtils.showSQL(ps);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getDouble("total_pay");
             }
+            cnt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return (int) total;
     }
 
-    public int getTotalPlan(int user_id,int month) {
+    public int getTotalPlan(int user_id, int month) {
         double total = 0;
         Connection cnt = JDBCUtils.getConnection();
         try {
             PreparedStatement ps = cnt.prepareStatement(SUM_TOTAL_PLAN);
             ps.setInt(1, user_id);
-            ps.setInt(2,month);
+            ps.setInt(2, month);
             JDBCUtils.showSQL(ps);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getDouble("total_plan");
             }
+            cnt.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return (int) total;
     }
 
-    public int getTotalValue(int user_id,int month) {
-        return (int) (getTotalIncome(user_id,month) - getTotalPay(user_id,month));
+    public int getTotalValue(int user_id, int month) {
+        return (int) (getTotalIncome(user_id, month) - getTotalPay(user_id, month));
     }
 
     public void removeBugdetByIdAndUser(int id, int user_id) {
@@ -134,46 +141,49 @@ public class BudgetDao {
             ps.setInt(2, user_id);
             JDBCUtils.showSQL(ps);
             ps.executeUpdate();
+            cnt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public List<Budget> sortByDate(int user_id,Date daySort){
+
+    public List<Budget> sortByDate(int user_id, Date daySort) {
         Connection cnt = JDBCUtils.getConnection();
         List<Budget> bg = new ArrayList<Budget>();
-        try{
+        try {
             PreparedStatement ps = cnt.prepareStatement(SORT_BY_DATE);
-            ps.setInt(1,user_id);
-            ps.setDate(2,daySort);
+            ps.setInt(1, user_id);
+            ps.setDate(2, daySort);
             JDBCUtils.showSQL(ps);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
                 double value = rs.getDouble("value");
                 Date createDay = rs.getDate("create_day");
                 int type = rs.getInt("type");
-                Budget b = new Budget(id,title,value,createDay,type,user_id);
+                Budget b = new Budget(id, title, value, createDay, type, user_id);
                 bg.add(b);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return bg;
     }
-    public void setUpdateById(Budget bg){
-        Connection cnt =JDBCUtils.getConnection();
-        try{
+
+    public void setUpdateById(Budget bg) {
+        Connection cnt = JDBCUtils.getConnection();
+        try {
             PreparedStatement ps = cnt.prepareStatement(UPDATE_BY_ID);
-            ps.setString(1,bg.getTitle());
-            ps.setDouble(2,bg.getValue());
-            ps.setDate(3,bg.getCreateDay());
-            ps.setInt(4,bg.getType());
-            ps.setInt(5,bg.getId());
-            ps.setInt(6,bg.getUser_id());
+            ps.setString(1, bg.getTitle());
+            ps.setDouble(2, bg.getValue());
+            ps.setDate(3, bg.getCreateDay());
+            ps.setInt(4, bg.getType());
+            ps.setInt(5, bg.getId());
+            ps.setInt(6, bg.getUser_id());
             JDBCUtils.showSQL(ps);
             ps.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

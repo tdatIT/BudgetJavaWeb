@@ -9,4 +9,5 @@ public class PageRedirect {
 
     //Redirect Servlet
     public static final String TABLE_SERVLET = "/nhap-du-lieu";
+    public static final String EXPORT_SERVLET = "/xuat-du-lieu";
 }

@@ -7,9 +7,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class JDBCUtils {
-    private static final String DB_URL="jdbc:mysql://localhost:3306/budget_java_web";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD= "123456";
+    private static final String DB_URL="jdbc:mysql://us-cdbr-east-06.cleardb.net/heroku_9f7dcbdbf3bae87";
+    private static final String USERNAME = "b8adc26ce80708";
+    private static final String PASSWORD= "0af31a40";
     public static Connection getConnection() {
         Connection cnt = null;
         try {

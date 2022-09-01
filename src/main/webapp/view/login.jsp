@@ -34,9 +34,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="bang-du-lieu">Nhập dữ liệu</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Phân tích</a>
-                </li>
+
             </ul>
         </div>
     </nav>
